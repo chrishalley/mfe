@@ -5,26 +5,26 @@ const packageJson = require('../package.json')
 const commonConfig = require('./webpack.common')
 
 const devConfig = {
-  mode: "development",
+  mode: 'development',
   output: {
-    publicPath: "http://localhost:8081/",
+    publicPath: "http://localhost:8082/",
   },
   devServer: {
-    port: 8081,
+    port: 8082,
     historyApiFallback: {
-      index: "index.html",
-    },
+      index: 'index.html'
+    }
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "marketing",
-      filename: "remoteEntry.js",
+      name: 'auth',
+      filename: 'remoteEntry.js',
       exposes: {
-        "./Marketing": "./src/bootstrap",
+        './Auth': './src/bootstrap'
       },
-      shared: packageJson.dependencies,
-    }),
-  ],
-};
+      shared: packageJson.dependencies
+    })
+  ]  
+}
 
 module.exports = merge(commonConfig, devConfig)
